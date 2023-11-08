@@ -10,4 +10,5 @@ This project aims to answer questions such as:
 - How has the number of daily COVID-19 cases evolved over the past year?
 - What is the trend of COVID-19 recoveries in different regions?
 - Are there any correlations betwen government-imposed restrictions and infection rates?
+
   
