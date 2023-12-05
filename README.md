@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Z1npak42)
 Project Overview: 
-This project investigate the relationship between urban green spaces and residents' well-being through geospatial analysis in the city of Los Angeles. The goal is to understand the distribution, accessibility, and potential correlations between green spaces and well-being indicators in the city.
+This project delves into a comprehensive analysis of crime patterns in Los Angeles, aiming to understand the distribution, severity, and potential correlations with demographic indicators. The goal is to unravel spatial aspects of crime in the city, pinpoint hotspots, and provide valuable insights for law enforcement and public safety strategies.
 
 Installation: 
 Clone the repository and install dependencies using 'pip install - r requirements.txt'. 
@@ -18,4 +18,4 @@ Producing Visualizations:
 Generate visualizations with 'python src/visualize_results.py'. Visualizations are tailored to Los Angeles and saved in 'results/'. 
 
 Results: 
-Key findings are summarized in the README, providing insights into the relationship between green spaces and well-being in Los Angeles. 
+Key findings regarding crime patterns, hotspots, and demographic correlations are summarized in results, providing valuable insights into the crime landscape in Los Angeles. 
