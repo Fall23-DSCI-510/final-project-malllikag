@@ -1,4 +1,3 @@
-# run_analysis.py
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -36,7 +35,7 @@ plt.show()
 central_region_data = merged_data[merged_data['Region'] == 'Central']
 monthly_crimes_central = central_region_data.groupby('Date').size().reset_index(name='Total_Crimes')
 
-# Calculate 2-month and 5-month moving averages
+# Calculate 2-month and 5-month moving averages for crime frequency in the Central Los Angeles area.
 monthly_crimes_central['2-Mo Moving Avg'] = monthly_crimes_central['Total_Crimes'].rolling(window=2).mean()
 monthly_crimes_central['5-Mo Moving Avg'] = monthly_crimes_central['Total_Crimes'].rolling(window=5).mean()
 
