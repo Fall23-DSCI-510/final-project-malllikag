@@ -1,42 +1,46 @@
+# run_analysis.py
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+from datetime import datetime
+from statsmodels.tsa.holtwinters import ExponentialSmoothing
 
-def analyze_crime_data(crime_data_file):
-    crime_df = pd.read_csv(data/processed/Crimes_6_LaRegions)
+merged_data = pd.read_csv('data/merged_data.csv')
 
-    # 1. Demographic Analysis: Bar chart representing distribution of victims by gender
-    plt.figure(figsize=(10, 6))
-    sns.countplot(x='Victim_Gender', data=crime_df, palette='pastel')
-    plt.title('Distribution of Victims by Gender')
-    plt.xlabel('Gender')
-    plt.ylabel('Count')
-    plt.savefig('results/victims_distribution_by_gender.png')
-    plt.show()
+# Convert 'Date' column to datetime format
+merged_data['Date'] = pd.to_datetime(merged_data['Date'])
 
-    # 2. Regional Analysis: Monthly crimes per region
-    region_monthly_crimes = crime_df.groupby(['Region', 'YearMonth'])['Crime_Type'].count().reset_index()
-    plt.figure(figsize=(12, 8))
-    sns.lineplot(x='YearMonth', y='Crime_Type', hue='Region', data=region_monthly_crimes)
-    plt.title('Monthly Crimes per Hotspot LA Region (2020-Present Day)')
-    plt.xlabel('Date')
-    plt.ylabel('Total Crimes')
-    plt.savefig('results/monthly_crimes_per_region.png')
-    plt.show()
+# Analysis 1: Correlation matrix (Pearson R)
+correlation_matrix = merged_data.corr()
 
-    # 3. Anomaly Detection: Monthly crimes in Central region with 2 and 5 month moving averages
-    central_region_crimes = crime_df[crime_df['Region'] == 'Central']
-    central_region_crimes['Date'] = pd.to_datetime(central_region_crimes['Date'])
-    plt.figure(figsize=(12, 8))
-    sns.lineplot(x='Date', y='Crime_Type', data=central_region_crimes, label='Monthly Crimes')
-    sns.lineplot(x='Date', y='Crime_Type', data=central_region_crimes.rolling(window=8).mean(), label='2 Month Avg')
-    sns.lineplot(x='Date', y='Crime_Type', data=central_region_crimes.rolling(window=20).mean(), label='5 Month Avg')
-    plt.title('Monthly Crimes - Central Region')
-    plt.xlabel('Date')
-    plt.ylabel('Crime Count')
-    plt.legend()
-    plt.savefig('results/monthly_crimes_central_region.png')
-    plt.show()
+# Analysis 2: Demographic Analysis - Bar chart
+gender_distribution = merged_data.groupby(['Crime_Code', 'Gender']).size().unstack()
+gender_distribution.plot(kind='bar', stacked=True)
+plt.title('Distribution of Victims by Gender (Demographic Analysis)')
+plt.xlabel('Crime Code')
+plt.ylabel('Count')
+plt.show()
 
-crime_data_file_path = 'data/processed/Crimes_6_LaRegions'
-analyze_crime_data(crime_data_file_path)
+# Analysis 3: Monthly Crimes per Region - Line graph
+regions_of_interest = ['77th Street', 'Central', 'Hollywood', 'Pacific', 'Southwest']
+monthly_crimes_per_region = merged_data[merged_data['Region'].isin(regions_of_interest)]
+monthly_crimes_per_region = monthly_crimes_per_region.groupby(['Date', 'Region']).size().unstack()
+
+monthly_crimes_per_region.plot(kind='line', marker='o')
+plt.title('Monthly Crimes for Hotspot LA Regions (2020-Present Day)')
+plt.xlabel('Date')
+plt.ylabel('Total Crimes')
+plt.legend(title='Region', loc='upper left')
+plt.show()
+
+# Analysis 4: Anomaly Detection - Line graph with moving averages
+central_region_data = merged_data[merged_data['Region'] == 'Central']
+monthly_crimes_central = central_region_data.groupby('Date').size().reset_index(name='Total_Crimes')
+
+# Calculate 2-month and 5-month moving averages
+monthly_crimes_central['2-Mo Moving Avg'] = monthly_crimes_central['Total_Crimes'].rolling(window=2).mean()
+monthly_crimes_central['5-Mo Moving Avg'] = monthly_crimes_central['Total_Crimes'].rolling(window=5).mean()
+
+monthly_crimes_central.plot(x='Date', y=['Total_Crimes', '2-Mo Moving Avg', '5-Mo Moving Avg'], marker='o')
+plt.title('Monthly Crimes Central')
+plt.xlabel('Date')
+plt.show()
