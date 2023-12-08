@@ -1,17 +1,22 @@
-import pandas as pd 
+# Display basic information about the dataset
+print("Original DataFrame:")
+print(df.info())
 
-def clean_data(dataframe):
-  dataframe = dataframe.dropna(axis=1, how='all')
-  dataframe = dataframe.dropna(subset=dataframe.columns[dataframe.isnull().any()])
-  return dataframe
+# Handling Missing Values
+df.dropna(inplace=True)
 
-def save_cleaned_data(cleaned_dataframe, output_filename):
-  cleaned_dataframe.to_csv(output_filename, index=False)
+# Removing Duplicates
+df.drop_duplicates(inplace=True)
 
-def clean_csv_file(input_filename, output_filename)
-  data=pd.read_csv(input_filename)
-  cleaned_data=clean_data(data)
-  save_cleaned_data(cleaned_data, output_filename)
+# Convert Date column to datetime format
+df['Order.Date'] = pd.to_datetime(df['Order.Date'])
 
-clean_csv_file('Regional_LACrimes_Yearly.csv', 'data/processed/cleaned_la_crimes.csv')
-clean_csv_file('ca_zip_pop.csv', 'data/processed/cleaned_ca_zip_pop.csv')
+# Extract Year and Month from the OrderDate
+df['Year'] = df['Order.Date'].dt.year
+df['Month'] = df['Order.Date'].dt.month
+
+# Display cleaned DataFrame
+print("\nCleaned DataFrame:")
+print(df.head())
+
+df.to_csv('cleaned_superstore.csv', index=False)
