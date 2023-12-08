@@ -1,21 +1,42 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Z1npak42)
-Project Overview: 
-This project delves into a comprehensive analysis of crime patterns in Los Angeles, aiming to understand the distribution, severity, and potential correlations with demographic indicators. The goal is to unravel spatial aspects of crime in the city, pinpoint hotspots, and provide valuable insights for law enforcement and public safety strategies.
+Project Title: Geospatial Analysis of Global Superstore Sales 
+Overview: The Global Superstore Sales Analysis project is a omprehensive exploration of sales and order data from a global superstore, aiming to derive meaningful insights for business optimization. Leveraging the Kaggle GLobal Superstore dataset, this project delves into patterns, trends, and regional variations within the sales landscape to inform strategic decision-making. 
 
-Installation: 
-Clone the repository and install dependencies using 'pip install - r requirements.txt'. 
+Requirements Installation: 
+Ensures that all necessary dependencies are installed by executing the following command: 
+pip install -r requirements.txt
 
 Getting the Data: 
-Run 'python src/get_data.py' to download geospatial data specific to Los Angeles into the 'data/raw' folder. 
+Retrieve the raw data with the following command: 
+python src/get_data.py 
 
-Cleaning the Data: 
-Execute 'python src/clean_data.py' to handle inconsistencies and convert data into a structured format. Processed data is stored in 'data/processed'. 
+Raw data files will be stored in the data/raw folder. 
 
-Running the Data Analysis: 
-Use 'python src/run_analysis.py to perform spatial analyses and view statistical findings on Los Angeles data/ 
+Data Cleaning: 
+Clean and preprocess the data using: 
+python src/clean_data.py 
+
+Cleaned and processed data will be stored in the 'data/processed' folder.
+
+Running the Analysis: 
+Execute the analysis code. 
+python src/run_analysis.py 
+
+This code performs various analyses on the processed data. 
 
 Producing Visualizations: 
-Generate visualizations with 'python src/visualize_results.py'. Visualizations are tailored to Los Angeles and saved in 'results/'. 
+Generate visualizations with: 
+python src/visualize results.py 
 
-Results: 
-Key findings regarding crime patterns, hotspots, and demographic correlations are summarized in results, providing valuable insights into the crime landscape in Los Angeles. 
+Visualizations will be saved in the 'results' folder. 
+
+Project Structure: 
+This project is organized as follows: 
+- data/raw: Contains raw files downloaded and scraped from the web.
+- data/processed: Contains structured files after data cleaning.
+- results: Contains the final report and other project related files.
+- src:
+     - get_data.py: Downloads and stores data in the 'data/raw' folder.
+     - clean_data.py: Cleans and transforms data, storing files in the 'data/processed' folder.
+     - run_analysis.py: Code to analyze the data and answer project-specific questions.
+     - visualize_results.py: Creates visualizations using libraries like Matplotlib. 
