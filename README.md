@@ -39,4 +39,6 @@ This project is organized as follows:
      - get_data.py: Downloads and stores data in the 'data/raw' folder.
      - clean_data.py: Cleans and transforms data, storing files in the 'data/processed' folder.
      - run_analysis.py: Code to analyze the data and answer project-specific questions.
-     - visualize_results.py: Creates visualizations using libraries like Matplotlib. 
+     - visualize_results.py: Creates visualizations using libraries like Matplotlib.
+ 
+  The notebook 'DSCI 510 Final.ipynb' located in the results folder can be run to achieve the above output.
